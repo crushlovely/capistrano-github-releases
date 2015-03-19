@@ -4,16 +4,6 @@ require 'highline'
 
 Dotenv.load
 
-module Dotenv
-  def self.add(key_value, filename = nil)
-    filename = File.expand_path(filename || '.env')
-    f = File.open(filename, File.exists?(filename) ? 'a' : 'w')
-    f.puts key_value
-    key, value = key_value.split('=')
-    ENV[key] = value
-  end
-end
-
 namespace :github do
   namespace :releases do
     set :ask_release, false
@@ -84,8 +74,8 @@ namespace :github do
 
     set :github_token, -> {
       if ENV['GITHUB_PERSONAL_ACCESS_TOKEN'].nil?
-        token = HighLine.new.ask('GitHub Personal Access Token?')
-        Dotenv.add "GITHUB_PERSONAL_ACCESS_TOKEN=#{token}"
+        HighLine.new.say('Please add your GITHUB_PERSONAL_ACCESS_TOKEN to your environment to create GitHub releases when deploying.')
+        nil
       else
         ENV['GITHUB_PERSONAL_ACCESS_TOKEN']
       end
