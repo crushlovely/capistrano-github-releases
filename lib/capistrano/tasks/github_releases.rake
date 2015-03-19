@@ -67,7 +67,7 @@ namespace :github do
       url = "#{fetch(:github_releases_path)}/#{fetch(:release_tag)}"
 
       <<-MD.gsub(/^ {6}/, '').strip
-        This change was deployed to production :octocat:
+        This change was deployed to #{fetch(:stage)} :corn: :sweet_potato: :eggplant:
         #{fetch(:release_title)}: [#{fetch(:release_tag)}](#{url})
       MD
     }
